@@ -3,14 +3,16 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
+  color-scheme: #007bff;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #007bff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin: 10px, 10px, 10px, 10px;
+  padding: 10px;
 }
 
 a {
@@ -24,10 +26,13 @@ a:hover {
 
 body {
   margin: 0;
+  padding: 0;
   display: flex;
   place-items: center;
+  justify-content: center;
+
   min-width: 320px;
-  min-height: 100vh;
+  min-height: 95vh;
 }
 
 h1 {

@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import UserInput from "./Components/UsersInput";
+import UserManagement from "./Components/UserManagement";
+
+export const addedUser = React.createContext(null);
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [newUser, setNewUser] = useState({
+    id: "",
+    name: "",
+    username: "",
+    email: "",
+    phone: "",
+    address: {
+      street: "",
+      city: "",
+      state: "",
+      zip: "",
+    },
+    website: "",
+    company: "",
+  });
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <addedUser.Provider value={{ newUser, setNewUser }}>
+      <Routes>
+        <Route path="/" element={<UserInput />} />
+        <Route path="/UserManagement" element={<UserManagement />} />
+      </Routes>
+    </addedUser.Provider>
+  );
 }
 
-export default App
+export default App;
