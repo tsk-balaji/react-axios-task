@@ -1,34 +1,37 @@
-import React, { useState } from "react";
+// App.jsx
+import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import axios from "axios";
 import UserInput from "./Components/UsersInput";
 import UserManagement from "./Components/UserManagement";
 
-export const addedUser = React.createContext(null);
+export const UserContext = React.createContext(null);
 
 function App() {
-  const [newUser, setNewUser] = useState({
-    id: "",
-    name: "",
-    username: "",
-    email: "",
-    phone: "",
-    address: {
-      street: "",
-      city: "",
-      state: "",
-      zip: "",
-    },
-    website: "",
-    company: "",
-  });
+  const [users, setUsers] = useState([]);
+
+  // Fetch initial users from the API when App loads
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get(
+          "https://jsonplaceholder.typicode.com/users"
+        );
+        setUsers(response.data);
+      } catch (error) {
+        console.error("Failed to fetch users:", error);
+      }
+    };
+    fetchUsers();
+  }, []);
 
   return (
-    <addedUser.Provider value={{ newUser, setNewUser }}>
+    <UserContext.Provider value={{ users, setUsers }}>
       <Routes>
         <Route path="/" element={<UserInput />} />
         <Route path="/UserManagement" element={<UserManagement />} />
       </Routes>
-    </addedUser.Provider>
+    </UserContext.Provider>
   );
 }
 

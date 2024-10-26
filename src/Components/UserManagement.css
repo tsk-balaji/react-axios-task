@@ -1,0 +1,21 @@
+.table-container {
+  overflow-x: auto;
+  max-height: 70vh; /* Limit the height if necessary */
+}
+
+.table-container::-webkit-scrollbar {
+  height: 12px; /* Adjust scrollbar thickness */
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.small-padding {
+  padding: 10px;
+}

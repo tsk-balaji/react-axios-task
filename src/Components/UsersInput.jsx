@@ -1,18 +1,26 @@
+// UsersInput.jsx
 // eslint-disable-next-line no-unused-vars
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom"; // Correctly importing Link
-import { addedUser } from "../App"; // Import the context
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../App";
 
 export default function UserInput() {
-  const { newUser, setNewUser } = useContext(addedUser);
+  const { users, setUsers } = useContext(UserContext);
+  const navigate = useNavigate(); // Initialize navigate
+  const [newUser, setNewUser] = useState({
+    id: users.length + 1, // Ensure unique ID
+    name: "",
+    username: "",
+    email: "",
+    phone: "",
+    address: { street: "", city: "", state: "", zip: "" },
+    website: "",
+    company: "",
+  });
 
-  // For individual input values to update dynamically
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setNewUser((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setNewUser((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleAddressChange = (e) => {
@@ -25,24 +33,21 @@ export default function UserInput() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setUsers([...users, newUser]); // Append new user to users list
     alert("User Added Successfully!");
 
-    // After submitting, reset the form values
     setNewUser({
-      id: "",
+      id: users.length + 1,
       name: "",
       username: "",
       email: "",
       phone: "",
-      address: {
-        street: "",
-        city: "",
-        state: "",
-        zip: "",
-      },
+      address: { street: "", city: "", state: "", zip: "" },
       website: "",
       company: "",
     });
+
+    navigate("/UserManagement"); // Navigate to UserManagement
   };
 
   return (
