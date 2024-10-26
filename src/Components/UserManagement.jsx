@@ -93,6 +93,9 @@ export default function UserManagement() {
 
   return (
     <div className="container small-padding">
+      <h2 className="my-4 text-center" style={{ color: "#4A4A4A" }}>
+        User Management
+      </h2>
       <Link to="/" className="btn btn-outline-primary mb-3">
         Home
       </Link>

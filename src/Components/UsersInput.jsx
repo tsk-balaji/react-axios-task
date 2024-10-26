@@ -8,7 +8,7 @@ export default function UserInput() {
   const { users, setUsers } = useContext(UserContext);
   const navigate = useNavigate(); // Initialize navigate
   const [newUser, setNewUser] = useState({
-    id: users.length + 1, // Ensure unique ID
+    id: users.length === 0 ? 11 : users.length + 1, // Ensure unique ID
     name: "",
     username: "",
     email: "",
@@ -54,7 +54,7 @@ export default function UserInput() {
     <div className="container">
       <div className="header d-flex justify-content-between align-items-center mt-0">
         <h2 className="my-4 text-center" style={{ color: "#4A4A4A" }}>
-          User Management
+          User Data Input
         </h2>
         <Link
           to="/UserManagement"
@@ -209,7 +209,7 @@ export default function UserInput() {
               onChange={handleChange}
             />
           </div>
-          <div className="col-12 text-center">
+          <div className="col-12 text-center mb-3">
             <button type="submit" className="btn btn-primary mt-3">
               Add User
             </button>
