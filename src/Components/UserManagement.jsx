@@ -10,7 +10,12 @@ export default function UserManagement() {
   const { users, setUsers } = useContext(UserContext);
 
   const handleDelete = (id) => {
-    setUsers(users.filter((user) => user.id !== id));
+    const confirmDelete = window.confirm(
+      `Are you sure you want to delete this user of User Id : ${id}`
+    );
+    if (confirmDelete) {
+      setUsers(users.filter((user) => user.id !== id));
+    }
   };
 
   const handleUpdate = (id) => {
